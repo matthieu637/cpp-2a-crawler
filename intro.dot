@@ -1,0 +1,37 @@
+digraph g{
+  rankdir=LR;
+
+  subgraph cluster_0{
+    style=invis;
+    "rudder";
+    "machine learning" [color=transparent, style=filled, fillcolor=gray];
+    "rudder" -> "parser" -> "aggregation" -> "database";
+    "parser" -> "rudder" ;
+    "database" -> "aggregation" ;
+    "database" -> "machine learning" [color=gray];
+  }
+
+  subgraph cluster_1 {
+    style=invis;
+    node [shape=square,color=transparent, margin=0 width=0 height=0];
+    edge [arrowhead=none, style=dashed]
+
+    more [label="decision", style=invis];
+    more2 [label="HtmlUnit\njsoup"];
+    more3 [style=invis];
+    more4 [label="MySQL\nSQLite"];
+
+    "more" -> "more2" [style=invis];
+    "more2" -> "more3" [style=invis];
+    "more3" -> "more4" [style=invis];
+
+    "more" -> "rudder"[weight=0,style=invis] ;
+    "more2" -> "parser"[weight=0];
+    "more3" -> "aggregation"[weight=0,style=invis];
+    "more4" -> "database"[weight=0];
+  }
+
+  s [label="website", style=filled, fillcolor=gray, color=transparent];
+  s->"more" [style=invis];
+  s->"rudder"[color=gray];
+}
