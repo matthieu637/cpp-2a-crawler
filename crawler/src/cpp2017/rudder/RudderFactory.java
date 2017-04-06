@@ -6,11 +6,11 @@ public class RudderFactory {
 	public Rudder getRudder(int typeRudder){
 		Rudder r;
 		switch (typeRudder){
-		case TYPE_RUDDER1:
-			r=new Rudder1();
-			break;
-		default:
-			throw new IllegalArgumentException("Type de rudder inconnu");
+			case TYPE_RUDDER1:
+				r=new Rudder1();
+				break;
+			default:
+				throw new IllegalArgumentException("Type de rudder inconnu");
 		}
 	return r;
 	}
