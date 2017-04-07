@@ -18,11 +18,13 @@ public final class LinkQueue {
 	private Queue<String> queueLien; 
 	
 	private LinkQueue(){
+		/**ConcurrentLinkedQueue pour empêcher l'accès en même temps
+		 * à la queue (par exemple deux Threads Parser qui veulent prendre
+		 * l'élément en front de la queue en même temps)
+		 * A voir s'il y a mieux
+		 */
 		queueLien= new ConcurrentLinkedQueue<String>(); 
-		//ConcurrentLinkedQueue pour empêcher l'accès en même temps
-		//à la queue (par exemple deux Threads Parser qui veulent prendre
-		//l'élément en front de la queue en même temps)
-		//A voir s'il y a mieux
+		
 	}
 	
 	
