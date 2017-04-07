@@ -1,12 +1,16 @@
 package cpp2017.rudder;
 
+/**
+ * @author David
+ * Premier objet hérité de Rudder (à compléter)
+ */
 public class Rudder1 extends Rudder {
 
 	public Rudder1(){
-		//constructeur � ajouter
+		//constructeur à ajouter
 	}
 	@Override
-	public void afficheTypeRudder() {
-		System.out.println("Rudder1");
+	public String toString() {
+		return "Rudder1";
 	}
 }
