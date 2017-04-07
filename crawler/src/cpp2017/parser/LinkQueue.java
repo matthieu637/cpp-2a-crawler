@@ -19,7 +19,7 @@ public final class LinkQueue {
 	
 	private LinkQueue(){
 		queueLien= new ConcurrentLinkedQueue<String>(); 
-		//ConcurrentLinkedQueue pour empècher l'accès en même temps
+		//ConcurrentLinkedQueue pour empêcher l'accès en même temps
 		//à la queue (par exemple deux Threads Parser qui veulent prendre
 		//l'élément en front de la queue en même temps)
 		//A voir s'il y a mieux
