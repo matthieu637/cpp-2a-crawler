@@ -28,9 +28,8 @@ public class Parser {
 			i++;}
 
 		return LinksList;
-
-
 	}
+	
 
 
 
