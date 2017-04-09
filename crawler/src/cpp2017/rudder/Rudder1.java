@@ -21,10 +21,11 @@ public class Rudder1 extends Rudder {
 		return "Rudder1";
 	}
 	
-	public void addLink(List<String> links) {
-		for(String link:links){
+	@Override
+	public void addLink(List<PriorityLink> links) {
+		for(PriorityLink link:links){
 			//à modifier quand le constructeur de PriorityLink aura changé
-			LinkQueue.getInstance().addPriorityLink(new PriorityLink(link));
+			LinkQueue.getInstance().addPriorityLink(link);
 		}
 	}
 }

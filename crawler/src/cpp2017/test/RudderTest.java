@@ -11,6 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import cpp2017.parser.LinkQueue;
+import cpp2017.parser.PriorityLink;
 import cpp2017.rudder.Rudder;
 import cpp2017.rudder.RudderFactory;
 
@@ -62,7 +63,8 @@ public class RudderTest {
 
 	@Test
 	public void testEnvoieLien() {
-		rudder1.addLink(Arrays.asList("http://stackoverflow.com/","https://ent.univ-lorraine.fr/"));
+		//test correspondant à un FIFO pour l'instant
+		rudder1.addLink(Arrays.asList(new PriorityLink("http://stackoverflow.com/"),new PriorityLink("https://ent.univ-lorraine.fr/")));
 		assertEquals("Bon nombre d'éléments",LinkQueue.getInstance().size(),2);
 		assertEquals("Envoie Rudder1 to LinkQueue, 1er lien","PriorityLink [url=http://stackoverflow.com/]",LinkQueue.getInstance().getLink().toString());
 		assertEquals("Envoie Rudder1 to LinkQueue, 2eme lien","PriorityLink [url=https://ent.univ-lorraine.fr/]",LinkQueue.getInstance().getLink().toString());

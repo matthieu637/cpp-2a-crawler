@@ -64,8 +64,12 @@ public final class LinkQueue {
 		return queueLien.size();
 	}
 	public PriorityLink getLink(){
-		System.out.println("appel");
 		return queueLien.pollLast(); //retourne le lien le mieux classé ou null si queueLien est une liste vide
+	}
+
+
+	public boolean isEmpty() {
+		return queueLien.isEmpty();
 	}
 
 }

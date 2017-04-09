@@ -2,7 +2,7 @@ package cpp2017.parser;
 
 public class PriorityLink implements Comparable {
 
-	String url;
+	private String url;
 	
 	public PriorityLink(String url){
 		// Pour l'instant, on ne met pas d'éléments de comparaison
@@ -23,6 +23,10 @@ public class PriorityLink implements Comparable {
 	@Override
 	public String toString() {
 		return "PriorityLink [url=" + url + "]";
+	}
+	public String getUrl() {
+		// TODO Auto-generated method stub
+		return url;
 	}
 	
 }
