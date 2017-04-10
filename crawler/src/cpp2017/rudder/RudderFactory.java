@@ -18,7 +18,7 @@ public class RudderFactory {
 	 * @param typeRudder
 	 * @return un objet hérité de Rudder
 	 * En fonction du type entré en paramètre, la factory
-	 * va créé le Rudder approprié
+	 * va créer le Rudder approprié
 	 */
 	public Rudder getRudder(int typeRudder){
 		Rudder r;

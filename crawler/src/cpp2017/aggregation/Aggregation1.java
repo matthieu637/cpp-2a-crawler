@@ -2,11 +2,11 @@ package cpp2017.aggregation;
 
 public class Aggregation1 extends Aggregation {
 
-	//attributs à ajouter
+	//attributs Ã  ajouter
 	
 	public Aggregation1(){
-		//constructeur à ajouter
+		//constructeur Ã  ajouter
 	}
 	
-	// fonctions à ajouter
+	// fonctions Ã  ajouter
 }

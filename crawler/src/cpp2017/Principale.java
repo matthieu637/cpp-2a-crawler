@@ -13,7 +13,6 @@ public class Principale {
 		System.out.println(testRudder1);
 		Parser testParser = new Parser("http://arche.univ-lorraine.fr/");
 		System.out.println(testParser.getInfos());
-
 	}
 
 }
