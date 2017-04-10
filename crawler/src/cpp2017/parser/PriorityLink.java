@@ -1,6 +1,6 @@
 package cpp2017.parser;
 
-public class PriorityLink implements Comparable {
+public class PriorityLink implements Comparable { //Pour l'instant pas d'outil de comparaison
 
 	private String url;
 	
