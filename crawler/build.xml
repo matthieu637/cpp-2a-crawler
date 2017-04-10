@@ -3,8 +3,8 @@
 
 	<property name="junit.output.dir" value="junit" />
 	<property name="debuglevel" value="source,lines,vars" />
-	<property name="target" value="1.8" />
-	<property name="source" value="1.8" />
+	<property name="target" value="1.7" />
+	<property name="source" value="1.7" />
 	<path id="crawler.classpath">
 		<pathelement location="bin" />
 		<pathelement location="libs/jsoup-1.10.2.jar" />
