@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="all" name="crawler">
+
+	<property name="junit.output.dir" value="junit" />
+	<property name="debuglevel" value="source,lines,vars" />
+	<property name="target" value="1.7" />
+	<property name="source" value="1.7" />
+	<path id="crawler.classpath">
+		<pathelement location="bin" />
+		<pathelement location="libs/jsoup-1.10.2.jar" />
+		<pathelement location="libs/sqlite-jdbc-3.16.1.jar" />
+		<pathelement location="libs/junit-4.12.jar" />
+	</path>
+
+	<target depends="clean,compile,doc,junitreport" name="all" />
+
+	<target name="clean">
+		<echo>Suppression des anciens fichiers compiles</echo>
+		<delete dir="bin" />
+		<delete dir="${junit.output.dir}" />
+		<delete dir="doc" />
+	</target>
+
+	<target name="init">
+		<mkdir dir="bin" />
+	</target>
+
+	<target name="compile" depends="init" description="Compile the source.">
+		<echo>Compilation de l'application</echo>
+		<javac destdir="bin/" optimize="on" debug="on" nowarn="off" source="${source}" target="${target}" encoding="utf-8" includeantruntime="false">
+			<src path="src" />
+			<classpath refid="crawler.classpath" />
+		</javac>
+	</target>
+	
+	<target name="doc" depends="init" description="Compile the source.">
+		<javadoc destdir="doc/" sourcepath="src/">
+			<classpath refid="crawler.classpath" />
+		</javadoc>
+	</target>
+
+	<target name="test">
+		<mkdir dir="${junit.output.dir}" />
+		<junit fork="yes" printsummary="withOutAndErr">
+			<formatter type="xml" />
+			<jvmarg line="-ea" />
+			<classpath refid="crawler.classpath" />
+		</junit>
+	</target>
+
+	<target name="junitreport" depends="test">
+		<junitreport todir="${junit.output.dir}">
+			<fileset dir="${junit.output.dir}">
+				<include name="TEST-*.xml" />
+			</fileset>
+			<report format="frames" todir="${junit.output.dir}" />
+		</junitreport>
+	</target>
+</project>
