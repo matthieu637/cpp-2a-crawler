@@ -13,8 +13,12 @@ import org.jsoup.select.Elements;
 import cpp2017.rudder.Rudder;
 import cpp2017.rudder.RudderFactory;
 
+
 /**
- * @author MathieuDEVALLE, David Thread différent des autres car les requêtes
+ * @author MathieuDEVALLE, David 
+ * Classe permettant de parser une page web à partir
+ * d'une url
+ * Thread différent des autres car les requêtes
  *         réseaux sont plus longues à exécuter.
  */
 public class Parser extends Thread {
@@ -48,21 +52,22 @@ public class Parser extends Thread {
 
 		return LinksList;
 	}
-	
+
 	/**
-	* @return
-	* @throws IOException
-	* On retourne une HashMap contenant les objets java. Pour
-	* récupérer les liens, on se connecte avec jsoup au site et on
-	* récupère les balises <a href="">, c'est à dire les balises
-	* HTML qui représentent les liens. Idem pour les autres catégories
-	*/
+	 * @return
+	 * @throws IOException
+	 *             On retourne une HashMap contenant les objets java. Pour
+	 *             récupérer les liens, on se connecte avec jsoup au site et on
+	 *             récupère les balises <a href="">, c'est à dire les balises
+	 *             HTML qui représentent les liens. Idem pour les autres catégories
+	 */
 	public HashMap<String, Vector<String>> getInfos() throws IOException {
 		HashMap<String, Vector<String>> contentParse = new HashMap<String, Vector<String>>();
 		Vector<String> linksList = new Vector<String>();
 		Vector<String> strongList = new Vector<String>();
 		Vector<String> H1List = new Vector<String>();
 		Vector<String> titreList = new Vector<String>(1);
+    
 		Document page = Jsoup.connect(this.currentLink.getUrl()).get();
 		String titre = page.title();
 		Elements titreH1s = page.select("h1");
@@ -124,5 +129,4 @@ public class Parser extends Thread {
 	private void changeCurrentLink(PriorityLink link) {
 		this.currentLink = link;
 	}
-
 }
