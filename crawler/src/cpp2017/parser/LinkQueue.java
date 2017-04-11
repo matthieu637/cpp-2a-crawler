@@ -46,7 +46,7 @@ public final class LinkQueue {
 	}
 	
 	/**
-	 * @param PriorityLink
+	 * @param lien
 	 * Cette fonction ajoute un lien à la fin de la queue
 	 * Elle sera appelé par le Rudder
 	 */

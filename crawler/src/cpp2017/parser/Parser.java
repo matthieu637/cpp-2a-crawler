@@ -58,7 +58,7 @@ public class Parser extends Thread {
 	 * @throws IOException
 	 *             On retourne une HashMap contenant les objets java. Pour
 	 *             récupérer les liens, on se connecte avec jsoup au site et on
-	 *             récupère les balises <a href="">, c'est à dire les balises
+	 *             récupère les balises &lt;a href=""&gt;, c'est à dire les balises
 	 *             HTML qui représentent les liens. Idem pour les autres catégories
 	 */
 	public HashMap<String, Vector<String>> getInfos() throws IOException {
