@@ -24,7 +24,7 @@ import cpp2017.rudder.RudderFactory;
 public class RudderTest {
 
 	static RudderFactory rudderFactory;
-	static Rudder rudder1;
+	static Rudder naiveRudder;
 	
 	
 	/**
@@ -34,7 +34,7 @@ public class RudderTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		rudderFactory= new RudderFactory();
-		rudder1=rudderFactory.getRudder(RudderFactory.TYPE_NAIVE_RUDDER,50);
+		naiveRudder=rudderFactory.getRudder(RudderFactory.TYPE_NAIVE_RUDDER,50);
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class RudderTest {
 	@Test
 	public void testEnvoieLien() {
 		//test correspondant à un FIFO pour l'instant
-		rudder1.addLink(Arrays.asList(new PriorityLink("http://stackoverflow.com/"),new PriorityLink("https://ent.univ-lorraine.fr/")));
+		naiveRudder.addLink(Arrays.asList(new PriorityLink("http://stackoverflow.com/"),new PriorityLink("https://ent.univ-lorraine.fr/")));
 		assertEquals("Bon nombre d'éléments",LinkQueue.getInstance().size(),2);
 		assertEquals("Envoie Rudder1 to LinkQueue, 1er lien","PriorityLink [url=http://stackoverflow.com/]",LinkQueue.getInstance().getLink().toString());
 		assertEquals("Envoie Rudder1 to LinkQueue, 2eme lien","PriorityLink [url=https://ent.univ-lorraine.fr/]",LinkQueue.getInstance().getLink().toString());
