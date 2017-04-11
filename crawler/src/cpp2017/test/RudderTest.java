@@ -34,7 +34,7 @@ public class RudderTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		rudderFactory= new RudderFactory();
-		rudder1=rudderFactory.getRudder(RudderFactory.TYPE_RUDDER1);
+		rudder1=rudderFactory.getRudder(RudderFactory.TYPE_NAIVE_RUDDER,50);
 	}
 
 	/**

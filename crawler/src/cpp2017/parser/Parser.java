@@ -34,7 +34,7 @@ public class Parser extends Thread {
 	public Parser(String url) {
 		this.currentLink = new PriorityLink(url);
 		rudderFactory = new RudderFactory();
-		rudder1 = rudderFactory.getRudder(RudderFactory.TYPE_RUDDER1);
+		rudder1 = rudderFactory.getRudder(RudderFactory.TYPE_NAIVE_RUDDER,50);
 	}
 
 	/**
