@@ -71,7 +71,14 @@
 				<file file="jacoco/coverage.exec"/>
 			</executiondata>
 
-			<structure name="cpp-2a-crawler" />
+			<structure name="cpp-2a-crawler" >
+				<classfiles>
+					<fileset dir="bin"/>
+				</classfiles>
+				<sourcefiles encoding="UTF-8">
+					<fileset dir="src"/>
+				</sourcefiles>
+			</structure>
 			<xml destfile="jacoco/jacoco.xml" />
 		</jacoco:report>
 	</target>
