@@ -54,10 +54,17 @@ public class RudderFactoryTest {
 	 * Tests pour la création de Rudders, si le Rudder créé par la factory est le bon.
 	 */
 	@Test
+	public final void testSingleton(){
+		RudderFactory rudderFactory1= RudderFactory.getInstance();
+		RudderFactory rudderFactory2= RudderFactory.getInstance();
+		if(rudderFactory1!=rudderFactory2)
+			fail("Doublet de RudderFactory");
+	}
 	public final void testCreationRudder() {
-		RudderFactory rudderFactory= new RudderFactory();
 		
-		assertEquals("CreationRudder1","NaiveRudder",rudderFactory.getRudder(RudderFactory.TYPE_NAIVE_RUDDER,50).toString());
+		assertEquals("CreationRudder1","NaiveRudder",RudderFactory.getInstance().getRudder(RudderFactory.TYPE_NAIVE_RUDDER).toString());
+		
+		
 	/*
 	 * Equivalent à:
 	 * if(!rudderFactory.getRudder(RudderFactory.TYPE_RUDDER1).toString().equals("Rudder1"))
