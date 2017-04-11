@@ -57,7 +57,7 @@ public class RudderFactoryTest {
 	public final void testCreationRudder() {
 		RudderFactory rudderFactory= new RudderFactory();
 		
-		assertEquals("CreationRudder1","Rudder1",rudderFactory.getRudder(RudderFactory.TYPE_RUDDER1).toString());
+		assertEquals("CreationRudder1","NaiveRudder",rudderFactory.getRudder(RudderFactory.TYPE_NAIVE_RUDDER,50).toString());
 	/*
 	 * Equivalent à:
 	 * if(!rudderFactory.getRudder(RudderFactory.TYPE_RUDDER1).toString().equals("Rudder1"))
