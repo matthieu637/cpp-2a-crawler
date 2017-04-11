@@ -22,8 +22,6 @@ import cpp2017.rudder.RudderFactory;
  */
 
 public class RudderTest {
-
-	static RudderFactory rudderFactory;
 	static Rudder naiveRudder;
 	
 	

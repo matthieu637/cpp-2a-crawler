@@ -1,6 +1,6 @@
 package cpp2017;
 
-public class CrawlerConfig {
+public final class CrawlerConfig {
 	
 	private static CrawlerConfig instance;
 	public final int NB_MAX_LIEN_NAIVE_RUDDER=50;
