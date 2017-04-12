@@ -17,10 +17,7 @@ public final class LinkQueue {
 	private TreeSet<PriorityLink> queueLien; 
 	
 	private LinkQueue(){
-		/**ConcurrentLinkedQueue pour empêcher l'accès en même temps
-		 * à la queue (par exemple deux Threads Parser qui veulent prendre
-		 * l'élément en front de la queue en même temps)
-		 * A voir s'il y a mieux
+		/** TreeSet pour ordonner les liens par ordre de pertinence
 		 */
 		queueLien= new TreeSet<PriorityLink>(); 
 		

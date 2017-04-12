@@ -23,7 +23,6 @@ import cpp2017.rudder.RudderFactory;
  */
 public class Parser extends Thread {
 	private PriorityLink currentLink; // Lien qui va se faire Parser
-	private RudderFactory rudderFactory; // createur de Rudder
 	private Rudder rudder1; // rudders qui vont recevoir les nouveaux liens (1
 							// seul pour l'instant)
 
@@ -32,9 +31,9 @@ public class Parser extends Thread {
 	 *            Constructeur à partir d'une String contenant l'url
 	 */
 	public Parser(String url) {
-		this.currentLink = new PriorityLink(url,0);
-		rudderFactory = new RudderFactory();
-		rudder1 = rudderFactory.getRudder(RudderFactory.TYPE_NAIVE_RUDDER,50);
+
+		this.currentLink = new PriorityLink(url);
+		rudder1 = RudderFactory.getInstance().getRudder(RudderFactory.TYPE_NAIVE_RUDDER);
 	}
 
 	/**
