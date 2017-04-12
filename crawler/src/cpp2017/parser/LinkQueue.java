@@ -68,5 +68,11 @@ public final class LinkQueue {
 	public boolean isEmpty() {
 		return queueLien.isEmpty();
 	}
+	
+	public int getPriorityOfLastElem(){
+		if(this.isEmpty())
+			return 0;
+		return this.queueLien.first().getPriority();
+	}
 
 }

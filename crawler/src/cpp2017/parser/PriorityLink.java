@@ -3,21 +3,22 @@ package cpp2017.parser;
 public class PriorityLink implements Comparable<PriorityLink> { //Pour l'instant pas d'outil de comparaison
 
 	private String url;
+	private int priority;
 	
-	public PriorityLink(String url){
+	public PriorityLink(String url,int priority){
 		// Pour l'instant, on ne met pas d'éléments de comparaison
 		// dans le constructeur parce qu'on a besoin d'un Parser 
 		// opérationnel pour celà.
 		this.url = url;
+		this.priority=priority;
+		
 	}
 	@Override
 	public int compareTo(PriorityLink link) {
 		// TODO Auto-generated method stub
-		return -1; // pas 0, sinon les éléments ne sont pas ajoutés
-		//il faudra biensur un retour sophistiqué, le signe du retour
-		//indique l'ordre dans lequel vont être classé les url
-		//l'un par rapport à l'autre
+		return link.getPriority()-this.priority;
 		//Pour l'instant la LinkQueue fait un simple FIFO
+		
 	}
 	
 	@Override
@@ -28,5 +29,7 @@ public class PriorityLink implements Comparable<PriorityLink> { //Pour l'instant
 		// TODO Auto-generated method stub
 		return url;
 	}
-	
+	public int getPriority(){
+		return priority;
+	}
 }

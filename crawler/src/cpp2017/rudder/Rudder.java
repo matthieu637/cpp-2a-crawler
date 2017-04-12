@@ -9,7 +9,8 @@ import cpp2017.parser.PriorityLink;
  *         abstraite Celà permettra le polymorphisme
  */
 public abstract class Rudder {
-	public abstract void addLink(List<PriorityLink> linkedList);
+	public abstract void addLink(List<String> linkedListOfLink);
+	public abstract void addPriorityLink(List<PriorityLink> links);
 
 	public abstract String toString();
 }

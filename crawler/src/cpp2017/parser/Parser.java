@@ -31,7 +31,8 @@ public class Parser extends Thread {
 	 *            Constructeur à partir d'une String contenant l'url
 	 */
 	public Parser(String url) {
-		this.currentLink = new PriorityLink(url);
+
+		this.currentLink = new PriorityLink(url,0);
 		rudder1 = RudderFactory.getInstance().getRudder(RudderFactory.TYPE_NAIVE_RUDDER);
 	}
 
@@ -39,13 +40,14 @@ public class Parser extends Thread {
 	 * @return LinkedList contenant les Liens repérés par le Parse
 	 * @throws IOException
 	 */
-	public LinkedList<PriorityLink> getLinks() throws IOException {
-		LinkedList<PriorityLink> LinksList = new LinkedList<PriorityLink>();
+	public LinkedList<String> getLinks() throws IOException {
+		LinkedList<String> LinksList = new LinkedList<String>();
 		Document page = Jsoup.connect(this.currentLink.getUrl()).get();
 		Elements links = page.select("a[href]");// le tag 'a' correspond aux
 												// liens
 		for (Element link : links) {
-			LinksList.add(new PriorityLink(link.attr("abs:href")));
+			//LinksList.add(new PriorityLink(link.attr("abs:href"),0));
+			LinksList.add(link.attr("abs:href"));
 		}
 
 		return LinksList;
