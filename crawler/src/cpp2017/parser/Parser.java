@@ -3,6 +3,7 @@ package cpp2017.parser;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Vector;
 
 import org.jsoup.Jsoup;
@@ -22,7 +23,7 @@ import cpp2017.rudder.Rudder;
  */
 public class Parser extends Thread {
 	private String currentLink; // Lien qui va se faire Parser
-	private Rudder naiveRudder; // rudders qui vont recevoir les nouveaux liens (1
+	private List<Rudder> lRudder; // rudders qui vont recevoir les nouveaux liens (1
 							// seul pour l'instant)
 
 	/**
@@ -31,6 +32,7 @@ public class Parser extends Thread {
 	 */
 	public Parser(String url) {
 		this.currentLink = url;
+		lRudder= new LinkedList<Rudder>();
 	}
 
 	/**
@@ -88,8 +90,8 @@ public class Parser extends Thread {
 	}
 	
 	
-	void registerRudder(Rudder naiveRudder){
-		this.naiveRudder=naiveRudder;
+	void registerRudder(Rudder r){
+		this.lRudder.add(r);
 	}
 
 	/*
@@ -115,7 +117,8 @@ public class Parser extends Thread {
 				try {
 					
 					// On ajoute les Liens trouvés lors du Parse aux rudders
-					naiveRudder.addLink(this.getLinks());
+					for(Rudder rudder:lRudder)
+						rudder.addLink(this.getLinks());
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
