@@ -1,5 +1,7 @@
 package cpp2017.parser;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.TreeSet;
 
 /**
@@ -10,6 +12,7 @@ import java.util.TreeSet;
 public final class LinkQueue {
 
 	private static LinkQueue instance;
+	private List<Parser> lParser;
 	
 	/**
 	 * Cette queue contiendra la liste des liens envoyés par le rudder
@@ -20,6 +23,7 @@ public final class LinkQueue {
 		/** TreeSet pour ordonner les liens par ordre de pertinence
 		 */
 		queueLien= new TreeSet<PriorityLink>(); 
+		lParser = new LinkedList<Parser>();
 		
 	}
 	
@@ -40,6 +44,10 @@ public final class LinkQueue {
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		throw new CloneNotSupportedException();
+	}
+	
+	public void registerParser(Parser p){
+		lParser.add(p);
 	}
 	
 	/**
