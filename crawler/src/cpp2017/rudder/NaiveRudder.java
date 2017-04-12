@@ -12,9 +12,12 @@ import cpp2017.parser.PriorityLink;
 public class NaiveRudder extends Rudder {
 
 	private int nbMaxLien;
-
+	private int compteurLiens;
+	
+	
 	public NaiveRudder(int nbMaxLien) {
 		this.nbMaxLien = nbMaxLien;
+		this.compteurLiens=0;
 		// constructeur à ajouter
 	}
 
@@ -25,8 +28,16 @@ public class NaiveRudder extends Rudder {
 
 	@Override
 	public void addPriorityLink(List<PriorityLink> links) {
-		if (links.size() > this.nbMaxLien)
-			links=links.subList(0, this.nbMaxLien);
+		int len=links.size();
+		if (len+this.compteurLiens > this.nbMaxLien){
+			if (this.compteurLiens==this.nbMaxLien)
+				return;
+			links=links.subList(0, this.nbMaxLien-this.compteurLiens);
+			this.compteurLiens=this.nbMaxLien;
+		}
+		else
+			this.compteurLiens+=len;
+		
 		for (PriorityLink link : links) {
 			// à modifier quand le constructeur de PriorityLink aura changé
 
