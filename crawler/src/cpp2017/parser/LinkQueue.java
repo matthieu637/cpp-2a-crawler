@@ -13,6 +13,7 @@ public final class LinkQueue {
 
 	private static LinkQueue instance;
 	private List<Parser> lParser;
+	private List<String> histoLink;
 	
 	/**
 	 * Cette queue contiendra la liste des liens envoyés par le rudder
@@ -24,7 +25,7 @@ public final class LinkQueue {
 		 */
 		queueLien= new TreeSet<PriorityLink>(); 
 		lParser = new LinkedList<Parser>();
-		
+		histoLink = new LinkedList<String>();
 	}
 	
 	
@@ -69,9 +70,20 @@ public final class LinkQueue {
 		return queueLien.size();
 	}
 	public PriorityLink getLink(){
-		return queueLien.pollLast(); //retourne le lien le mieux classé ou null si queueLien est une liste vide
+		while (this.alreadyParsed(queueLien.last().getUrl()))
+			queueLien.pollLast();
+		PriorityLink linkToParse= queueLien.pollLast();
+		histoLink.add(linkToParse.getUrl());
+		return linkToParse; //retourne le lien le mieux classé ou null si queueLien est une liste vide
 	}
 
+	private boolean alreadyParsed(String newLink){
+		for (String link:histoLink ){
+			if(link.equals(newLink))
+				return true;
+		}
+		return false;
+	}
 
 	public boolean isEmpty() {
 		return queueLien.isEmpty();
