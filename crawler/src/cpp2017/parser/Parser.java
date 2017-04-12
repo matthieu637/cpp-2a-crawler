@@ -21,7 +21,7 @@ import cpp2017.rudder.Rudder;
  *         réseaux sont plus longues à exécuter.
  */
 public class Parser extends Thread {
-	private PriorityLink currentLink; // Lien qui va se faire Parser
+	private String currentLink; // Lien qui va se faire Parser
 	private Rudder naiveRudder; // rudders qui vont recevoir les nouveaux liens (1
 							// seul pour l'instant)
 
@@ -30,21 +30,21 @@ public class Parser extends Thread {
 	 *            Constructeur à partir d'une String contenant l'url
 	 */
 	public Parser(String url) {
-		this.currentLink = new PriorityLink(url);
-		//rudder1 = RudderFactory.getInstance().getRudder(RudderFactory.TYPE_NAIVE_RUDDER);
+		this.currentLink = url;
 	}
 
 	/**
 	 * @return LinkedList contenant les Liens repérés par le Parse
 	 * @throws IOException
 	 */
-	public LinkedList<PriorityLink> getLinks() throws IOException {
-		LinkedList<PriorityLink> LinksList = new LinkedList<PriorityLink>();
-		Document page = Jsoup.connect(this.currentLink.getUrl()).get();
+	public LinkedList<String> getLinks() throws IOException {
+		LinkedList<String> LinksList = new LinkedList<String>();
+		Document page = Jsoup.connect(this.currentLink).get();
 		Elements links = page.select("a[href]");// le tag 'a' correspond aux
 												// liens
 		for (Element link : links) {
-			LinksList.add(new PriorityLink(link.attr("abs:href")));
+			//LinksList.add(new PriorityLink(link.attr("abs:href"),0));
+			LinksList.add(link.attr("abs:href"));
 		}
 
 		return LinksList;
@@ -65,7 +65,7 @@ public class Parser extends Thread {
 		Vector<String> H1List = new Vector<String>();
 		Vector<String> titreList = new Vector<String>(1);
     
-		Document page = Jsoup.connect(this.currentLink.getUrl()).get();
+		Document page = Jsoup.connect(this.currentLink).get();
 		String titre = page.title();
 		Elements titreH1s = page.select("h1");
 		Elements strongs = page.select("strong");
@@ -110,7 +110,7 @@ public class Parser extends Thread {
 					e.printStackTrace();
 				}
 			} else { // Sinon, on change le lien qui doit être parser
-				this.changeCurrentLink(LinkQueue.getInstance().getLink());
+				this.changeCurrentLink(LinkQueue.getInstance().getLink().getUrl());
 
 				try {
 					
@@ -128,7 +128,7 @@ public class Parser extends Thread {
 	 * @param link
 	 *            Change le Lien sur lequel le parse doit se faire
 	 */
-	private void changeCurrentLink(PriorityLink link) {
+	private void changeCurrentLink(String link) {
 		this.currentLink = link;
 	}
 }
