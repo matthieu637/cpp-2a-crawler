@@ -1,6 +1,6 @@
 package cpp2017.parser;
 
-public class PriorityLink implements Comparable { //Pour l'instant pas d'outil de comparaison
+public class PriorityLink implements Comparable<PriorityLink> { //Pour l'instant pas d'outil de comparaison
 
 	private String url;
 	
@@ -11,7 +11,7 @@ public class PriorityLink implements Comparable { //Pour l'instant pas d'outil d
 		this.url = url;
 	}
 	@Override
-	public int compareTo(Object o) {
+	public int compareTo(PriorityLink link) {
 		// TODO Auto-generated method stub
 		return -1; // pas 0, sinon les éléments ne sont pas ajoutés
 		//il faudra biensur un retour sophistiqué, le signe du retour

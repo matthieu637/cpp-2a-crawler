@@ -22,8 +22,6 @@ import cpp2017.rudder.RudderFactory;
  */
 
 public class RudderTest {
-
-	static RudderFactory rudderFactory;
 	static Rudder naiveRudder;
 	
 	
@@ -33,8 +31,7 @@ public class RudderTest {
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		rudderFactory= new RudderFactory();
-		naiveRudder=rudderFactory.getRudder(RudderFactory.TYPE_NAIVE_RUDDER,50);
+		naiveRudder=RudderFactory.getInstance().getRudder(RudderFactory.TYPE_NAIVE_RUDDER);
 	}
 
 	/**
