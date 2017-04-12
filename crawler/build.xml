@@ -16,7 +16,7 @@
 		<classpath path="libs/jacocoant.jar" />
 	</taskdef>
 
-	<target depends="clean,compile,doc,junitreport" name="all" />
+	<target depends="clean,compile,doc,report" name="all" />
 
 	<target name="clean">
 		<echo>Suppression des anciens fichiers compiles</echo>
@@ -59,13 +59,28 @@
 		</jacoco:coverage>
 	</target>
 
-	<target name="junitreport" depends="test">
+	<target name="report" depends="test">
 		<junitreport todir="${junit.output.dir}">
 			<fileset dir="${junit.output.dir}">
 				<include name="TEST-*.xml" />
 			</fileset>
 			<report format="frames" todir="${junit.output.dir}" />
 		</junitreport>
+		<jacoco:report>
+			<executiondata>
+				<file file="jacoco/coverage.exec"/>
+			</executiondata>
+
+			<structure name="cpp-2a-crawler" >
+				<classfiles>
+					<fileset dir="bin"/>
+				</classfiles>
+				<sourcefiles encoding="UTF-8">
+					<fileset dir="src"/>
+				</sourcefiles>
+			</structure>
+			<xml destfile="jacoco/jacoco.xml" />
+		</jacoco:report>
 	</target>
 
 </project>
