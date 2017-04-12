@@ -11,7 +11,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import cpp2017.rudder.Rudder;
-import cpp2017.rudder.RudderFactory;
 
 
 /**
@@ -23,7 +22,7 @@ import cpp2017.rudder.RudderFactory;
  */
 public class Parser extends Thread {
 	private PriorityLink currentLink; // Lien qui va se faire Parser
-	private Rudder rudder1; // rudders qui vont recevoir les nouveaux liens (1
+	private Rudder naiveRudder; // rudders qui vont recevoir les nouveaux liens (1
 							// seul pour l'instant)
 
 	/**
@@ -32,7 +31,7 @@ public class Parser extends Thread {
 	 */
 	public Parser(String url) {
 		this.currentLink = new PriorityLink(url);
-		rudder1 = RudderFactory.getInstance().getRudder(RudderFactory.TYPE_NAIVE_RUDDER);
+		//rudder1 = RudderFactory.getInstance().getRudder(RudderFactory.TYPE_NAIVE_RUDDER);
 	}
 
 	/**
@@ -87,6 +86,11 @@ public class Parser extends Thread {
 		contentParse.put("liens", linksList);
 		return contentParse;
 	}
+	
+	
+	void registerRudder(Rudder naiveRudder){
+		this.naiveRudder=naiveRudder;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -111,7 +115,7 @@ public class Parser extends Thread {
 				try {
 					
 					// On ajoute les Liens trouvés lors du Parse aux rudders
-					rudder1.addLink(this.getLinks());
+					naiveRudder.addLink(this.getLinks());
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
