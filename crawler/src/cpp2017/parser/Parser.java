@@ -3,6 +3,7 @@ package cpp2017.parser;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Vector;
 
 import org.jsoup.Jsoup;
@@ -11,7 +12,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import cpp2017.rudder.Rudder;
-import cpp2017.rudder.RudderFactory;
 
 
 /**
@@ -22,8 +22,8 @@ import cpp2017.rudder.RudderFactory;
  *         réseaux sont plus longues à exécuter.
  */
 public class Parser extends Thread {
-	private PriorityLink currentLink; // Lien qui va se faire Parser
-	private Rudder rudder1; // rudders qui vont recevoir les nouveaux liens (1
+	private String currentLink; // Lien qui va se faire Parser
+	private List<Rudder> lRudder; // rudders qui vont recevoir les nouveaux liens (1
 							// seul pour l'instant)
 
 	/**
@@ -31,9 +31,8 @@ public class Parser extends Thread {
 	 *            Constructeur à partir d'une String contenant l'url
 	 */
 	public Parser(String url) {
-
-		this.currentLink = new PriorityLink(url,0);
-		rudder1 = RudderFactory.getInstance().getRudder(RudderFactory.TYPE_NAIVE_RUDDER);
+		this.currentLink = url;
+		lRudder= new LinkedList<Rudder>();
 	}
 
 	/**
@@ -42,7 +41,7 @@ public class Parser extends Thread {
 	 */
 	public LinkedList<String> getLinks() throws IOException {
 		LinkedList<String> LinksList = new LinkedList<String>();
-		Document page = Jsoup.connect(this.currentLink.getUrl()).get();
+		Document page = Jsoup.connect(this.currentLink).get();
 		Elements links = page.select("a[href]");// le tag 'a' correspond aux
 												// liens
 		for (Element link : links) {
@@ -68,7 +67,7 @@ public class Parser extends Thread {
 		Vector<String> H1List = new Vector<String>();
 		Vector<String> titreList = new Vector<String>(1);
     
-		Document page = Jsoup.connect(this.currentLink.getUrl()).get();
+		Document page = Jsoup.connect(this.currentLink).get();
 		String titre = page.title();
 		Elements titreH1s = page.select("h1");
 		Elements strongs = page.select("strong");
@@ -89,6 +88,11 @@ public class Parser extends Thread {
 		contentParse.put("liens", linksList);
 		return contentParse;
 	}
+	
+	
+	void registerRudder(Rudder r){
+		this.lRudder.add(r);
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -108,12 +112,13 @@ public class Parser extends Thread {
 					e.printStackTrace();
 				}
 			} else { // Sinon, on change le lien qui doit être parser
-				this.changeCurrentLink(LinkQueue.getInstance().getLink());
+				this.changeCurrentLink(LinkQueue.getInstance().getLink().getUrl());
 
 				try {
 					
 					// On ajoute les Liens trouvés lors du Parse aux rudders
-					rudder1.addLink(this.getLinks());
+					for(Rudder rudder:lRudder)
+						rudder.addLink(this.getLinks());
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -126,7 +131,7 @@ public class Parser extends Thread {
 	 * @param link
 	 *            Change le Lien sur lequel le parse doit se faire
 	 */
-	private void changeCurrentLink(PriorityLink link) {
+	private void changeCurrentLink(String link) {
 		this.currentLink = link;
 	}
 }
