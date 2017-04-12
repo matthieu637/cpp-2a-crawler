@@ -30,6 +30,8 @@ public class NaiveRudder extends Rudder {
 	public void addPriorityLink(List<PriorityLink> links) {
 		int len=links.size();
 		if (len+this.compteurLiens > this.nbMaxLien){
+			if (this.compteurLiens==this.nbMaxLien)
+				return;
 			links=links.subList(0, this.nbMaxLien-this.compteurLiens);
 			this.compteurLiens=this.nbMaxLien;
 		}
