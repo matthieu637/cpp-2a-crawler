@@ -57,7 +57,8 @@ public class RudderTest {
 	@After
 	public void tearDown() throws Exception {
 	}
-
+/*
+ * test plus d'actualité car maintenant les liens déjà parsés ne passent pas
 	@Test
 	public void testPriorityEnvoieLien() {
 		//test priority, plus priority est petit, plus le lien est prioritaire
@@ -85,20 +86,20 @@ public class RudderTest {
 		assertEquals("Bon nombre d'éléments",LinkQueue.getInstance().size(),2);
 		assertEquals("Envoie Rudder1 to LinkQueue, 1er lien","PriorityLink [url=https://ent.univ-lorraine.fr/]",LinkQueue.getInstance().getLink().toString());
 		assertEquals("Envoie Rudder1 to LinkQueue, 2eme lien","PriorityLink [url=http://stackoverflow.com/]",LinkQueue.getInstance().getLink().toString());
-	}
+	}*/
 	/**
 	 * Test si le naiveRudder renvoie les liens dans l'ordre de la réception
 	 * Pour l'instant il n'y a pas de suppression de doublons.
 	 */
 	@Test
 	public void testNaiveRudder(){
-		naiveRudder.addLink(Arrays.asList("http://stackoverflow.com/","https://ent.univ-lorraine.fr/","https://ent.univ-lorraine.fr/","https://github.com/"));
+		naiveRudder.addLink(Arrays.asList("http://stackoverflow.com/","https://ent.univ-lorraine.fr/","http://arche.univ-lorraine.fr/course/","https://github.com/"));
 		
 		assertEquals("Bon nombre d'éléments",LinkQueue.getInstance().size(),4);
 		
 		assertEquals("Premier élément","http://stackoverflow.com/",LinkQueue.getInstance().getLink().getUrl());
 		assertEquals("Deuxième élément","https://ent.univ-lorraine.fr/",LinkQueue.getInstance().getLink().getUrl());
-		assertEquals("Troisième élément en ToString(pas de suppression de doublon)","PriorityLink [url=https://ent.univ-lorraine.fr/]",LinkQueue.getInstance().getLink().toString());
+		assertEquals("Troisième élément en ToString","PriorityLink [url=http://arche.univ-lorraine.fr/course/]",LinkQueue.getInstance().getLink().toString());
 		assertEquals("Dernier élément","https://github.com/",LinkQueue.getInstance().getLink().getUrl());
 		
 		assertEquals("Bon nombre d'éléments",LinkQueue.getInstance().size(),0);
