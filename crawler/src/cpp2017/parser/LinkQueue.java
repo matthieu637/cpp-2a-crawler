@@ -58,6 +58,7 @@ public final class LinkQueue {
 	 */
 	public void addPriorityLink(PriorityLink lien){
 		queueLien.add(lien);
+		histoLink.add(lien.getUrl());
 		synchronized(this){
 			this.notifyAll();
 		}
@@ -73,19 +74,11 @@ public final class LinkQueue {
 		return queueLien.size();
 	}
 	public PriorityLink getLink(){
-		while (this.alreadyParsed(queueLien.last().getUrl())){
-			if(queueLien.size()==1)
-				return queueLien.pollLast(); //pas besoin de l'ajouter à l'histo, il est déjà parser.
-			else
-				queueLien.pollLast();
-		}
-		
 		PriorityLink linkToParse= queueLien.pollLast();
-		histoLink.add(linkToParse.getUrl());
 		return linkToParse; //retourne le lien le mieux classé ou null si queueLien est une liste vide
 	}
 
-	private boolean alreadyParsed(String newLink){
+	public boolean alreadyParsed(String newLink){
 		for (String link:histoLink ){
 			if(link.equals(newLink))
 				return true;
@@ -103,6 +96,10 @@ public final class LinkQueue {
 		if(this.isEmpty())
 			return 0;
 		return this.queueLien.first().getPriority();
+	}
+	public void clearAll(){
+		queueLien.clear();
+		histoLink.clear();
 	}
 
 }

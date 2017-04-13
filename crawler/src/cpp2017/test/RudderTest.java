@@ -11,7 +11,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import cpp2017.parser.LinkQueue;
-import cpp2017.parser.PriorityLink;
 import cpp2017.rudder.Rudder;
 import cpp2017.rudder.RudderFactory;
 
@@ -56,9 +55,10 @@ public class RudderTest {
 	 */
 	@After
 	public void tearDown() throws Exception {
+		LinkQueue.getInstance().clearAll();
 	}
 /*
- * test plus d'actualité car maintenant les liens déjà parsés ne passent pas
+  // test plus d'actualité car maintenant les liens déjà parsés ne passent pas
 	@Test
 	public void testPriorityEnvoieLien() {
 		//test priority, plus priority est petit, plus le lien est prioritaire
@@ -103,6 +103,12 @@ public class RudderTest {
 		assertEquals("Dernier élément","https://github.com/",LinkQueue.getInstance().getLink().getUrl());
 		
 		assertEquals("Bon nombre d'éléments",LinkQueue.getInstance().size(),0);
+	}
+	
+	@Test 
+	public void testSuppressionDoublon(){
+		naiveRudder.addLink(Arrays.asList("http://stackoverflow.com/","http://stackoverflow.com/"));
+		assertEquals("Problème suppression doublon",LinkQueue.getInstance().size(),1);
 	}
 
 }
