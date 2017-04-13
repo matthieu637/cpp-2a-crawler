@@ -82,43 +82,6 @@ public class JsoupParser extends Parser {
 		contentParse.put("liens", linksList);
 		return contentParse;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Thread#run() Ce que fait le Thread lorsqu'il est en cours
-	 * d'exécution
-	 */
-	/*
-	@Override
-	public void run() {
-		while (true) { // Pour l'instant il n'y a pas de conditions d'arrêt
-
-			if (LinkQueue.getInstance().isEmpty()) { // S'il n'y a aucun lien à
-														// parser dans la queue
-				try {
-					Thread.sleep(10); // On pause le thread pendant 10 ms et on
-										// regarde de nouveau
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			} else { // Sinon, on change le lien qui doit être parser
-				this.changeCurrentLink(LinkQueue.getInstance().getLink().getUrl());
-				try {
-					//On affiche les infos trouvés
-					System.out.println(this.getInfos());
-					
-					// On ajoute les Liens trouvés lors du Parse aux rudders
-					for(Rudder rudder:lRudder)
-						rudder.addLink(this.getLinks());
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-	}
-*/
 	/**
 	 * @param link
 	 *            Change le Lien sur lequel le parse doit se faire

@@ -17,8 +17,6 @@ public class Principale {
 		Rudder testNaiveRudder = RudderFactory.getInstance().getRudder(RudderFactory.TYPE_NAIVE_RUDDER);
 		System.out.println(testNaiveRudder);
 		Parser testJsoupParser = ParserFactory.getInstance().getParser(ParserFactory.TYPE_JSOUP_PARSER);
-		//Parser testParser = new Parser("http://arche.univ-lorraine.fr/");
-		//System.out.println(testParser.getInfos());
 		testJsoupParser.registerRudder(testNaiveRudder);
 		testJsoupParser.start();
 		LinkQueue.getInstance().registerParser(testJsoupParser);

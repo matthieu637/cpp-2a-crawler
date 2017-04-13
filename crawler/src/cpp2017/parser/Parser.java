@@ -9,8 +9,10 @@ import cpp2017.parser.LinkQueue;
 import cpp2017.rudder.Rudder;
 
 /**
- * @author MathieuDEVALLE, David Classe permettant de parser une page web à
- *         partir d'une url Thread différent des autres car les requêtes réseaux
+ * @author MathieuDEVALLE, David 
+ * 		   Classe permettant de parser une page web à
+ *         partir d'une url 
+ *         Thread différent des autres car les requêtes réseaux
  *         sont plus longues à exécuter.
  */
 public abstract class Parser extends Thread {
@@ -21,9 +23,22 @@ public abstract class Parser extends Thread {
 
 	public abstract HashMap<String, Vector<String>> getInfos() throws IOException;
 
+	
+	/**
+	 * @param r
+	 * enregistre le rudder auquel transmettre les liens trouvés lors du parse.
+	 */
 	public void registerRudder(Rudder r) {
 		this.rudder = r;
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Thread#
+	 * run() Ce que fait le Thread lorsqu'il est en cours
+	 * d'exécution
+	 */
 
 	public void run() {
 
