@@ -58,6 +58,10 @@ public final class LinkQueue {
 	 */
 	public void addPriorityLink(PriorityLink lien){
 		queueLien.add(lien);
+		synchronized(this){
+			//System.out.println("Hello");
+			this.notifyAll();
+		}
 	}
 	
 	/**
@@ -88,6 +92,8 @@ public final class LinkQueue {
 	public boolean isEmpty() {
 		return queueLien.isEmpty();
 	}
+	
+	
 	
 	public int getPriorityOfLastElem(){
 		if(this.isEmpty())

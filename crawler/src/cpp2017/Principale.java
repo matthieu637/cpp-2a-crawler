@@ -20,11 +20,10 @@ public class Principale {
 		//Parser testParser = new Parser("http://arche.univ-lorraine.fr/");
 		//System.out.println(testParser.getInfos());
 		testJsoupParser.registerRudder(testNaiveRudder);
+		testJsoupParser.start();
 		LinkQueue.getInstance().registerParser(testJsoupParser);
 		
 		testNaiveRudder.addLink(Arrays.asList("http://arche.univ-lorraine.fr/"));
-		
-		testJsoupParser.start();
 		
 	}
 
