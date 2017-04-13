@@ -73,8 +73,13 @@ public final class LinkQueue {
 		return queueLien.size();
 	}
 	public PriorityLink getLink(){
-		while (this.alreadyParsed(queueLien.last().getUrl()))
-			queueLien.pollLast();
+		while (this.alreadyParsed(queueLien.last().getUrl())){
+			if(queueLien.size()==1)
+				return queueLien.pollLast(); //pas besoin de l'ajouter à l'histo, il est déjà parser.
+			else
+				queueLien.pollLast();
+		}
+		
 		PriorityLink linkToParse= queueLien.pollLast();
 		histoLink.add(linkToParse.getUrl());
 		return linkToParse; //retourne le lien le mieux classé ou null si queueLien est une liste vide
