@@ -59,7 +59,6 @@ public final class LinkQueue {
 	public void addPriorityLink(PriorityLink lien){
 		queueLien.add(lien);
 		synchronized(this){
-			//System.out.println("Hello");
 			this.notifyAll();
 		}
 	}
