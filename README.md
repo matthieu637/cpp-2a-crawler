@@ -1,6 +1,6 @@
 # cpp-2a-crawler
-master : [![Build Status](https://matthieu-zimmer.net/jenkins/buildStatus/icon?job=cpp-2a-crawler)](https://matthieu-zimmer.net/jenkins/job/cpp-2a-crawler/)
-last push : [![Build Status](https://matthieu-zimmer.net/jenkins/buildStatus/icon?job=cpp-2a-crawler-all)](https://matthieu-zimmer.net/jenkins/job/cpp-2a-crawler-all/)
+master : [![Build Status](https://img.shields.io/jenkins/s/https/matthieu-zimmer.net/jenkins/job/cpp-2a-crawler.svg)](https://matthieu-zimmer.net/jenkins/job/cpp-2a-crawler/)
+last push : [![Build Status](https://img.shields.io/jenkins/s/https/matthieu-zimmer.net/jenkins/job/cpp-2a-crawler-all.svg)](https://matthieu-zimmer.net/jenkins/job/cpp-2a-crawler-all/)
 master : [![Tests Status](https://img.shields.io/jenkins/t/https/matthieu-zimmer.net/jenkins/job/cpp-2a-crawler.svg)](https://matthieu-zimmer.net/jenkins/job/cpp-2a-crawler/)
 [![Coverage Status](https://matthieu-zimmer.net/nodejs/j/jacoco/https/matthieu-zimmer.net/jenkins/job/cpp-2a-crawler)](https://matthieu-zimmer.net/jenkins/job/cpp-2a-crawler/lastBuild/jacoco/)
 
