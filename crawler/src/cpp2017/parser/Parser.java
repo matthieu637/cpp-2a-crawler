@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Vector;
 
+import java.util.concurrent.locks.Lock;
+
 import cpp2017.parser.LinkQueue;
 import cpp2017.rudder.Rudder;
 
@@ -22,6 +24,9 @@ public abstract class Parser extends Thread {
 	public abstract LinkedList<String> getLinks() throws IOException;
 
 	public abstract HashMap<String, Vector<String>> getInfos() throws IOException;
+	
+	private static final class Lock{}
+	private final Object lock= new Lock();
 
 	
 	/**
@@ -46,8 +51,10 @@ public abstract class Parser extends Thread {
 			synchronized (LinkQueue.getInstance()) {
 				try {
 
+					synchronized (lock){
 					while (LinkQueue.getInstance().isEmpty())
 						LinkQueue.getInstance().wait();
+					}
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

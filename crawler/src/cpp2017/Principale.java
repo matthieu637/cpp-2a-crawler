@@ -11,6 +11,7 @@ import cpp2017.rudder.RudderFactory;
 
 public class Principale {
 
+	
 	public static void main(String[] args) throws IOException {
 		Connexion co = new Connexion();
 		co.connect();
@@ -21,6 +22,15 @@ public class Principale {
 		Parser testJsoupParser = ParserFactory.getInstance().getParser(ParserFactory.TYPE_JSOUP_PARSER);
 		testJsoupParser.registerRudder(testNaiveRudder);
 		testJsoupParser.start();
+		try {
+			/*	Pour être sur que le parser est à l'écoute quand la queueLien lui 
+			 * transmet son premier lien (sinon rien ne se passe)
+			 */
+			Thread.sleep(1000); 
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		LinkQueue.getInstance().registerParser(testJsoupParser);
 
 		testNaiveRudder.addLink(Arrays.asList("http://arche.univ-lorraine.fr/"));

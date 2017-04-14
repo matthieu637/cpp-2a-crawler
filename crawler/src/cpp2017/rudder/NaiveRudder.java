@@ -50,7 +50,10 @@ public class NaiveRudder extends Rudder {
 			links=links.subList(0, this.nbMaxLien);
 		for (String link : links) {
 			// à modifier quand le constructeur de PriorityLink aura changé
-			LinkQueue.getInstance().addPriorityLink(new PriorityLink(link,LinkQueue.getInstance().getPriorityOfLastElem()+1));
+			if(!LinkQueue.getInstance().alreadyParsed(link))
+			{
+				LinkQueue.getInstance().addPriorityLink(new PriorityLink(link,LinkQueue.getInstance().getPriorityOfLastElem()+1));
+			}
 		}
 	}
 }
