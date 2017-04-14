@@ -20,11 +20,6 @@ import org.jsoup.select.Elements;
  */
 public class JsoupParser extends Parser {
 
-	/**
-	 * Constructeur à partir d'une String contenant l'url
-	 * 
-	 * @param url
-	 */
 	public JsoupParser() {
 	}
 
