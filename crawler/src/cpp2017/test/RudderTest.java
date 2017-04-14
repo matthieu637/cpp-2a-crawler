@@ -90,9 +90,10 @@ public class RudderTest {
 	/**
 	 * Test si le naiveRudder renvoie les liens dans l'ordre de la réception
 	 * Pour l'instant il n'y a pas de suppression de doublons.
+	 * @throws InterruptedException 
 	 */
 	@Test
-	public void testNaiveRudder(){
+	public void testNaiveRudder() throws InterruptedException{
 		naiveRudder.addLink(Arrays.asList("http://stackoverflow.com/","https://ent.univ-lorraine.fr/","http://arche.univ-lorraine.fr/course/","https://github.com/"));
 		
 		assertEquals("Bon nombre d'éléments",LinkQueue.getInstance().size(),4);

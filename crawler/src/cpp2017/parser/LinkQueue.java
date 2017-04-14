@@ -60,23 +60,25 @@ public final class LinkQueue {
 	 * @param lien
 	 */
 	public synchronized void addPriorityLink(PriorityLink lien) {
-		//verrou pour l'écriture
+		// verrou pour l'écriture
 		queueLien.add(lien);
 		histoLink.add(lien.getUrl());
 		this.notifyAll();
 	}
 
-	/**
-	 * @return PriorityLink Cette fonction retourne et enlève le lien qui se
-	 *         trouve au début de la queue Elle sera appelé par les threads
-	 *         parser A voir si on a besoin de synchronized si queueLien est une
-	 *         ConcurrentLinkedQueue
-	 */
-	public int size() {
+	public synchronized int size() {
 		return queueLien.size();
 	}
 
-	public PriorityLink getLink() {
+	/**
+	 * Cette fonction retourne et enlève le lien qui se trouve au début de la
+	 * queue Elle sera appelé par les threads parser 
+	 * @return PriorityLink 
+	 */
+	public synchronized PriorityLink getLink() throws InterruptedException {
+		while (queueLien.isEmpty())
+			wait();
+
 		PriorityLink linkToParse = queueLien.pollLast();
 		return linkToParse; // retourne le lien le mieux classé ou null si
 							// queueLien est une liste vide
@@ -90,17 +92,13 @@ public final class LinkQueue {
 		return false;
 	}
 
-	public boolean isEmpty() {
-		return queueLien.isEmpty();
-	}
-
 	public synchronized int getPriorityOfLastElem() {
-		if (this.isEmpty())
+		if (queueLien.isEmpty())
 			return 0;
 		return this.queueLien.first().getPriority();
 	}
 
-	public void clearAll() {
+	public synchronized void clearAll() {
 		queueLien.clear();
 		histoLink.clear();
 	}

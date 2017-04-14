@@ -61,20 +61,9 @@ public abstract class Parser extends Thread {
 	public void run() {
 
 		while (true) {
-			// verrou sur la queue
-			synchronized (LinkQueue.getInstance()) {
-				try {
-					while (LinkQueue.getInstance().isEmpty()) {
-						// libere le verrou jusqu'à notify
-						LinkQueue.getInstance().wait();
-					}
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-
-				this.changeCurrentLink(LinkQueue.getInstance().getLink().getUrl());
-			}
 			try {
+				this.changeCurrentLink(LinkQueue.getInstance().getLink().getUrl());
+
 				// On affiche les infos trouvés
 				System.out.println(Thread.currentThread().getId() + " " + this.getInfos());
 
@@ -88,7 +77,7 @@ public abstract class Parser extends Thread {
 					// pas besoin d'ajouter les liens déjà parsé, cela redonne
 					// du travail au gourvernail pour rien
 				}
-			} catch (IOException e) {
+			} catch (IOException | InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
