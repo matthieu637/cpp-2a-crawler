@@ -1,7 +1,10 @@
 package cpp2017.parser;
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 
 /**
@@ -15,7 +18,11 @@ public final class LinkQueue {
 
 	private static LinkQueue instance;
 	private List<Parser> lParser;
-	private List<String> histoLink;
+	/**
+	 * Ensemble des liens déjà présenté à la queue. HashSet pour test
+	 * d'appartenance en O(1).
+	 */
+	private Set<String> histoLink;
 
 	/**
 	 * Cette queue contiendra la liste des liens envoyés par le rudder
@@ -28,7 +35,7 @@ public final class LinkQueue {
 		 */
 		queueLien = new TreeSet<PriorityLink>();
 		lParser = new LinkedList<Parser>();
-		histoLink = new LinkedList<String>();
+		histoLink = new HashSet<String>();
 	}
 
 	/**
@@ -72,8 +79,9 @@ public final class LinkQueue {
 
 	/**
 	 * Cette fonction retourne et enlève le lien qui se trouve au début de la
-	 * queue Elle sera appelé par les threads parser 
-	 * @return PriorityLink 
+	 * queue Elle sera appelé par les threads parser
+	 * 
+	 * @return PriorityLink
 	 */
 	public synchronized PriorityLink getLink() throws InterruptedException {
 		while (queueLien.isEmpty())
@@ -101,6 +109,14 @@ public final class LinkQueue {
 	public synchronized void clearAll() {
 		queueLien.clear();
 		histoLink.clear();
+	}
+
+	public synchronized void removeAlreadyParsed(List<String> links) {
+		for (Iterator<String> it = links.iterator(); it.hasNext();) {
+			String l = it.next();
+			if (histoLink.contains(l))
+				it.remove();
+		}
 	}
 
 }

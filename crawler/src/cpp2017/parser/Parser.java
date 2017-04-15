@@ -3,6 +3,7 @@ package cpp2017.parser;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Vector;
 
 import cpp2017.rudder.Rudder;
@@ -62,21 +63,18 @@ public abstract class Parser extends Thread {
 
 		while (true) {
 			try {
+				// attente sur getLink
 				this.changeCurrentLink(LinkQueue.getInstance().getLink().getUrl());
 
 				// On affiche les infos trouvés
-				System.out.println(Thread.currentThread().getId() + " " + this.getInfos());
+				System.out.println(Thread.currentThread().getId() + " " + currentLink);
 
-				// verrou sur le rudder pour les écritures concurrentes
-				synchronized (rudder) {
-					// On ajoute les Liens trouvés lors du Parse au rudder
-
-					for (String link : this.getLinks())
-						if (!LinkQueue.getInstance().alreadyParsed(link))
-							rudder.addLink(this.getLinks());
-					// pas besoin d'ajouter les liens déjà parsé, cela redonne
-					// du travail au gourvernail pour rien
-				}
+				// parse
+				List<String> links = this.getLinks();
+				// pas besoin d'ajouter les liens déjà parsé, cela redonne
+				// du travail au gourvernail pour rien
+				LinkQueue.getInstance().removeAlreadyParsed(links);
+				rudder.addLink(links);
 			} catch (IOException | InterruptedException e) {
 				e.printStackTrace();
 			}
