@@ -19,16 +19,16 @@ public class Principale {
 		Rudder testNaiveRudder = RudderFactory.getInstance().getRudder(RudderFactory.TYPE_NAIVE_RUDDER);
 		System.out.println(testNaiveRudder);
 		Parser testJsoupParser = ParserFactory.getInstance().getParser(ParserFactory.TYPE_JSOUP_PARSER);
+		Parser testJsoupParser2 = ParserFactory.getInstance().getParser(ParserFactory.TYPE_JSOUP_PARSER);
 		testJsoupParser.registerRudder(testNaiveRudder);
+		testJsoupParser2.registerRudder(testNaiveRudder);
+		testJsoupParser2.start();
 		testJsoupParser.start();
 		LinkQueue.getInstance().registerParser(testJsoupParser);
 
 		testNaiveRudder.addLink(Arrays.asList("http://arche.univ-lorraine.fr/"));
 
 		// On peut ajouter un parser en cours de route
-		Parser testJsoupParser2 = ParserFactory.getInstance().getParser(ParserFactory.TYPE_JSOUP_PARSER);
-		testJsoupParser2.registerRudder(testNaiveRudder);
-		testJsoupParser2.start();
 		LinkQueue.getInstance().registerParser(testJsoupParser2);
 	}
 
