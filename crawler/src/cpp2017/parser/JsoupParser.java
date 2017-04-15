@@ -10,22 +10,16 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-
-
 /**
- * @author MathieuDEVALLE, David 
- * Classe permettant de parser une page web à partir
- * d'une url
- * Thread différent des autres car les requêtes
- *         réseaux sont plus longues à exécuter.
+ * @author MathieuDEVALLE
+ * @author David
+ * 
+ *         Classe permettant de parser une page web à partir d'une url Thread
+ *         différent des autres car les requêtes réseaux sont plus longues à
+ *         exécuter.
  */
 public class JsoupParser extends Parser {
-	private String currentLink; // Lien qui va se faire Parser
 
-	/**
-	 * @param url
-	 *            Constructeur à partir d'une String contenant l'url
-	 */
 	public JsoupParser() {
 	}
 
@@ -39,7 +33,7 @@ public class JsoupParser extends Parser {
 		Elements links = page.select("a[href]");// le tag 'a' correspond aux
 												// liens
 		for (Element link : links) {
-			//LinksList.add(new PriorityLink(link.attr("abs:href"),0));
+			// LinksList.add(new PriorityLink(link.attr("abs:href"),0));
 			LinksList.add(link.attr("abs:href"));
 		}
 
@@ -47,12 +41,12 @@ public class JsoupParser extends Parser {
 	}
 
 	/**
-	 * @return
+	 * On retourne une HashMap contenant les objets java. Pour récupérer les
+	 * liens, on se connecte avec jsoup au site et on récupère les balises &lt;a
+	 * href=""&gt;, c'est à dire les balises HTML qui représentent les liens.
+	 * Idem pour les autres catégories * @return
+	 * 
 	 * @throws IOException
-	 *             On retourne une HashMap contenant les objets java. Pour
-	 *             récupérer les liens, on se connecte avec jsoup au site et on
-	 *             récupère les balises &lt;a href=""&gt;, c'est à dire les balises
-	 *             HTML qui représentent les liens. Idem pour les autres catégories
 	 */
 	public HashMap<String, Vector<String>> getInfos() throws IOException {
 		HashMap<String, Vector<String>> contentParse = new HashMap<String, Vector<String>>();
@@ -60,7 +54,7 @@ public class JsoupParser extends Parser {
 		Vector<String> strongList = new Vector<String>();
 		Vector<String> H1List = new Vector<String>();
 		Vector<String> titreList = new Vector<String>(1);
-    
+
 		Document page = Jsoup.connect(this.currentLink).get();
 		String titre = page.title();
 		Elements titreH1s = page.select("h1");
@@ -81,12 +75,5 @@ public class JsoupParser extends Parser {
 		contentParse.put("strong", strongList);
 		contentParse.put("liens", linksList);
 		return contentParse;
-	}
-	/**
-	 * @param link
-	 *            Change le Lien sur lequel le parse doit se faire
-	 */
-	protected void changeCurrentLink(String link) {
-		this.currentLink = link;
 	}
 }
