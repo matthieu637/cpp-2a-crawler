@@ -55,7 +55,7 @@ public class JsoupParser extends Parser {
 		Vector<String> H1List = new Vector<String>();
 		Vector<String> titreList = new Vector<String>(1);
 
-		Document page = Jsoup.connect(this.currentLink).get();
+		Document page = Jsoup.connect(this.currentLink).userAgent("Mozilla").get();
 		String titre = page.title();
 		Elements titreH1s = page.select("h1");
 		Elements strongs = page.select("strong");

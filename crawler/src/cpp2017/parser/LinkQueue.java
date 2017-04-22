@@ -79,8 +79,10 @@ public final class LinkQueue {
 		mutex_ordre_write.lock();
 		queueLien.add(lien);
 		histoLink.add(lien.getUrl());
+		synchronized(this){
+			this.notify();
+		}
 		mutex_ordre_write.unlock();
-		this.notifyAll();
 	}
 
 	public int size() {
@@ -100,7 +102,9 @@ public final class LinkQueue {
 		mutex_ordre_write.lock();
 		while (queueLien.isEmpty()){
 			mutex_ordre_write.unlock();
-			wait();
+			synchronized(this){
+				this.wait();
+			}
 			mutex_ordre_write.lock();
 		}
 		PriorityLink linkToParse = queueLien.pollLast();
